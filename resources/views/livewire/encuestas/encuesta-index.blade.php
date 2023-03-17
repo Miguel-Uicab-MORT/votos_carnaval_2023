@@ -6,14 +6,14 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="flex items-center">
+        <div class="flex items-center mb-5">
             <x-input type="text" class="flex-1" placeholder="Buscar concruso" wire:model="search" />
             <div class="ml-2">
                 @livewire('encuestas.encuesta-create')
             </div>
         </div>
 
-        <div class="py-5">
+        <x-table>
             <table class="tables">
                 <thead>
                     <tr>
@@ -69,7 +69,7 @@
                     </tfoot>
                 @endif
             </table>
-        </div>
+        </x-table>
     </div>
 
     <x-dialog-modal wire:model="editModal">

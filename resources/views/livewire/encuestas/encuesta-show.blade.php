@@ -6,12 +6,12 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="flex items-center">
+        <div class="flex items-center mb-5">
             <x-input type="text" class="flex-1" placeholder="Buscar aspecto a calificar" wire:model="search" />
             @livewire('encuestas.pregunta-create', ['encuesta_id' => $encuesta->id], key($encuesta->id))
         </div>
 
-        <div class="py-5">
+        <x-table>
             <table class="tables">
                 <thead>
                     <tr>
@@ -50,7 +50,7 @@
                     </tfoot>
                 @endif
             </table>
-        </div>
+        </x-table>
     </div>
 
     <x-dialog-modal wire:model="open_edit">
