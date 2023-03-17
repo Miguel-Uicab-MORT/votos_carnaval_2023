@@ -17,6 +17,11 @@ class EncuestaShow extends Component
 
     public $encuesta;
 
+    public $open_edit = false, $aspecto;
+    public $rules = [
+        'aspecto.nombre_pregunta' => 'required'
+    ];
+
     public function mount(Encuesta $encuesta)
     {
         $this->encuesta = $encuesta;
@@ -27,6 +32,22 @@ class EncuestaShow extends Component
         $pregunta->delete();
         $this->emit('render');
         $this->emit('alert-success', 'Pregunta eliminada con éxito');
+    }
+
+    public function edit(Pregunta $pregunta)
+    {
+        $this->aspecto = $pregunta;
+        $this->validate();
+        $this->open_edit = true;
+    }
+
+    public function update()
+    {
+        $this->validate();
+        $this->aspecto->save();
+        $this->open_edit = false;
+        $this->emit('render');
+        $this->emit('alert-success', 'Pregunta actualizada con éxito');
     }
 
     public function render()
