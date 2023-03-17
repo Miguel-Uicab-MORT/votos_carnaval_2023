@@ -23,19 +23,19 @@
 }
 
 .tables thead{
-    @apply bg-gray-50;
+    @apply bg-gray-50 bg-opacity-80;
 }
 
 .tables th{
-    @apply px-6 text-sm py-2 text-left text-xs font-medium text-gray-700 uppercase tracking-wider;
+    @apply px-3 text-sm py-2 text-left font-bold text-xs text-gray-700 uppercase tracking-wider;
 }
 
 .tables tbody{
-    @apply bg-white divide-y divide-gray-200;
+    @apply bg-white bg-opacity-60 divide-y divide-gray-200;
 }
 
 .tables td{
-    @apply px-6 text-xs py-1 whitespace-nowrap;
+    @apply px-3 font-bold text-xs py-1 whitespace-nowrap;
 }
 
 .tables td div{
