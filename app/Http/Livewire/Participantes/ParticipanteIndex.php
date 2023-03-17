@@ -18,6 +18,13 @@ class ParticipanteIndex extends Component
         $this->resetPage();
     }
 
+    public function delete(Participante $participante)
+    {
+        $participante->delete();
+        $this->emit('render');
+        $this->emit('alert-success', 'Participante eliminado con éxito');
+    }
+
     public function render()
     {
         $participantes = Participante::where('nombre', 'LIKE', "%{$this->search}%")
