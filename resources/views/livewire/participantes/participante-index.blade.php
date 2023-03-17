@@ -49,11 +49,9 @@
                         @endforeach
                     </tbody>
                     <tfoot>
-                        <tr>
-                            <td colspan="7">
-                                {{ $participantes->links() }}
-                            </td>
-                        </tr>
+                        <td colspan="7">
+                            {{ $participantes->links() }}
+                        </td>
                     </tfoot>
                 @else
                     <tfoot>
