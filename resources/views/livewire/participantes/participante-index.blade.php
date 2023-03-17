@@ -20,8 +20,8 @@
                         <th>Posición</th>
                         <th>Nombre</th>
                         <th>Evento</th>
-                        <th>Representante</th>
                         <th>Organización</th>
+                        <th>Representante</th>
                         <th>Telefono</th>
                         <th>Acciones</th>
                     </tr>
@@ -33,8 +33,8 @@
                                 <td>{{ $participante->posicion }}</td>
                                 <td>{{ $participante->nombre }}</td>
                                 <td>{{ $participante->encuesta->nombre_encuesta }}</td>
-                                <td>{{ $participante->representante }}</td>
                                 <td>{{ $participante->organizacion }}</td>
+                                <td>{{ $participante->representante }}</td>
                                 <td>{{ $participante->telefono }}</td>
                                 <td class="flex justify-end">
                                     <x-button wire:click="edit({{ $participante->id }})"
@@ -142,7 +142,7 @@
                 </div>
 
                 <div class="col-span-2">
-                    <x-label for="descripcion" :value="__('Descripción*')" />
+                    <x-label for="descripcion" :value="__('Observaciones')" />
                     <x-input id="descripcion" class="block mt-1 w-full" type="text" wire:model="participante.descripcion" />
                     @error('descripcion') <span class="error">{{ $message }}</span> @enderror
                 </div>

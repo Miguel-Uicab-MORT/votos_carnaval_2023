@@ -25,7 +25,7 @@ class ParticipanteIndex extends Component
         'participante.organizacion' => 'nullable',
         'participante.telefono' => 'required',
         'participante.tematica' => 'required',
-        'participante.descripcion' => 'required',
+        'participante.descripcion' => 'nullable',
         'participante.encuesta_id' => 'required',
         'participante.numero_participantes' => 'nullable',
         'participante.musica' => 'nullable',
@@ -75,8 +75,8 @@ class ParticipanteIndex extends Component
     public function render()
     {
         $participantes = Participante::where('nombre', 'LIKE', "%{$this->search}%")
-            ->orderBy('nombre')
-            ->paginate(10);
+            ->orderBy('posicion', 'ASC')
+            ->paginate(15);
 
         return view('livewire.participantes.participante-index', compact('participantes'));
     }

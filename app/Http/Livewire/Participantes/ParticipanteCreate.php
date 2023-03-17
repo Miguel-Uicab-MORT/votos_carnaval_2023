@@ -33,7 +33,6 @@ class ParticipanteCreate extends Component
             'organizacion' => 'required',
             'telefono' => 'required',
             'tematica' => 'required',
-            'descripcion' => 'required',
         ]);
 
         try {

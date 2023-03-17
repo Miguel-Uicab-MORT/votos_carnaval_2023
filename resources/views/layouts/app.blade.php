@@ -23,7 +23,7 @@
     <body class="font-sans antialiased">
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="h-screen bg-cover bg-center" style="background-image: url('/img/fondo.jpg')">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
