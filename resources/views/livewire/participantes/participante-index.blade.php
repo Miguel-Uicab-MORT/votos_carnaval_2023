@@ -6,14 +6,14 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="flex items-center">
+        <div class="flex items-center mb-5">
             <x-input type="text" class="flex-1" placeholder="Buscar participante" wire:model="search" />
             <div class="ml-2">
                 @livewire('participantes.participante-create')
             </div>
         </div>
 
-        <div class="py-5">
+        <x-table>
             <table class="tables">
                 <thead>
                     <tr>
@@ -21,6 +21,7 @@
                         <th>Nombre</th>
                         <th>Evento</th>
                         <th>Representante</th>
+                        <th>Organización</th>
                         <th>Telefono</th>
                         <th>Acciones</th>
                     </tr>
@@ -33,6 +34,7 @@
                                 <td>{{ $participante->nombre }}</td>
                                 <td>{{ $participante->encuesta->nombre_encuesta }}</td>
                                 <td>{{ $participante->representante }}</td>
+                                <td>{{ $participante->organizacion }}</td>
                                 <td>{{ $participante->telefono }}</td>
                                 <td class="flex justify-end">
                                     <x-button wire:click="edit({{ $participante->id }})"
@@ -48,7 +50,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="6">
+                            <td colspan="7">
                                 {{ $participantes->links() }}
                             </td>
                         </tr>
@@ -56,7 +58,7 @@
                 @else
                     <tfoot>
                         <tr>
-                            <td colspan="6">
+                            <td colspan="7">
                                 <div class="flex justify-center">
                                     <span>No hay registros</span>
                                 </div>
@@ -65,7 +67,7 @@
                     </tfoot>
                 @endif
             </table>
-        </div>
+        </x-table>
     </div>
 
     <x-dialog-modal wire:model="editModal">
