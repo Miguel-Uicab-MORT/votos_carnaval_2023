@@ -21,7 +21,7 @@ class ParticipanteIndex extends Component
     public $rules = [
         'participante.nombre' => 'required',
         'participante.representante' => 'required',
-        'participante.organizacion' => 'required',
+        'participante.organizacion' => 'nullable',
         'participante.telefono' => 'required',
         'participante.tematica' => 'required',
         'participante.descripcion' => 'required',
