@@ -19,6 +19,7 @@ class ParticipanteCreate extends Component
         if ($this->createModal) {
             $this->createModal = false;
         } else {
+            $this->reset(['nombre', 'encuesta_id', 'representante', 'posicion', 'organizacion', 'telefono', 'tematica', 'numero_participantes', 'musica', 'duracion', 'descripcion']);
             $this->createModal = true;
         }
     }
