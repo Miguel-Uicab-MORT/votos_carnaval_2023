@@ -61,7 +61,7 @@
                 @endforeach
             </div>
             <div class="flex justify-end items-center">
-                <x-button class="mt-4" wire:click="guardarCalificaciones">
+                <x-button class="mt-4" wire:click="guardarCalificaciones" wire:loading.attr="disabled">
                     {{ __('Guardar') }}
                 </x-button>
             </div>

@@ -25,5 +25,5 @@ Route::get('resultados/{participante}', \App\Http\Livewire\Resultados\ResultadoS
 Route::get('votos', \App\Http\Livewire\Votos\VotoEncuesta::class)->name('votos.encuesta')->middleware('auth')->can('votos.encuesta');
 Route::get('votos/{encuesta}', \App\Http\Livewire\Votos\VotoParticipante::class)->name('votos.participante')->middleware('auth')->can('votos.participante');
 Route::get('votos/participante/{participante}', \App\Http\Livewire\Votos\VotoPreguntas::class)->name('votos.preguntas')->middleware('auth')->can('votos.preguntas');
-Route::get('descargar_gandores', [\App\Http\Controllers\PrinterController::class, 'ganadores'])->name('ganadores')->middleware('auth');
+Route::get('descargar_gandores/{encuesta}', [\App\Http\Controllers\PrinterController::class, 'ganadores'])->name('ganadores')->middleware('auth');
 Route::get('descargar_resultados', [\App\Http\Controllers\PrinterController::class, 'resultados'])->name('resultados')->middleware('auth');

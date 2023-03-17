@@ -8,8 +8,8 @@
     <div class="p-5">
 
         <div class="flex justify-between">
-            <x-btn-print-ticket  href="{{route('ganadores')}}" >
-                Descargar Ganadores
+            <x-btn-print-ticket  href="{{route('ganadores', $id_encuesta)}}" >
+                Resultado por Jueces
             </x-btn-print-ticket>
             <x-btn-print-ticket class="ml-2" href="{{route('resultados')}}" >
                 Descargar resultados

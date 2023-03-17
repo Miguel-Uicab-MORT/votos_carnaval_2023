@@ -25,6 +25,11 @@ class VotoPreguntas extends Component
 
     public function guardarCalificaciones()
     {
+        foreach ($this->preguntas as $pregunta) {
+            $this->validate([
+                'calificaciones.' . ($pregunta->id-1) => 'required|numeric|min:0|max:10'
+            ]);
+        }
         try {
             DB::beginTransaction();
             foreach ($this->preguntas as $pregunta) {
@@ -40,12 +45,11 @@ class VotoPreguntas extends Component
                 $respuesta->save();
             }
             DB::commit();
-            return redirect()->route('votos.participante', $this->encuesta);
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
         }
-
+        return redirect()->route('votos.participante', $this->encuesta);
     }
     public function render()
     {

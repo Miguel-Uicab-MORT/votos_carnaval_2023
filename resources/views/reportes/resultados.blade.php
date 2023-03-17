@@ -23,7 +23,7 @@
         }
 
         .logo img {
-            height: 15%;
+            height: 5%;
             width: auto;
         }
 
@@ -58,18 +58,6 @@
 
 <body>
 
-<header>
-    <div class="logo">
-        <img src="{{asset('/recursos/img/LIFE_STYLE_GYM_LOGO.jpg')}}" alt="Logo del negocio">
-    </div>
-    <div class="info-negocio">
-        <h2><strong>LIFE STYLE GYM</strong></h2>
-        <p>C. 106 43, Barrio de Sta Lucía, </p>
-        <p>24020 Campeche, Camp.</p>
-        <p><strong>Celular: 981 147 1407</strong></p>
-    </div>
-    <div style="clear: both;"></div>
-</header>
 <main>
     <div>
         <h3 class="text-center">
@@ -79,31 +67,45 @@
 
     <table class="tables">
         <thead>
-        <th>
-            CLIENTE
-        </th>
-        <th>
-            TIPO DE PAGO
-        </th>
-        <th>
-            FECHA DE PAGO
-        </th>
+        <tr>
+            <th rowspan="2">No</th>
+            <th rowspan="2">Carro</th>
+            <th colspan="4">Jueces</th>
+            <th rowspan="2">Suma</th>
+            <th rowspan="2">Lugar</th>
+        </tr>
+        <tr>
+            <th>Juez 1</th>
+            <th>Juez 2</th>
+            <th>Juez 3</th>
+            <th>Juez 4</th>
+        </tr>
         </thead>
+        <tbody>
+        @foreach($participantes->sortBy('posicion') as $participante)
+            <tr>
+                <td>{{ $participante->posicion }}</td>
+                <td>{{ $participante->nombre }}</td>
+                @php
+                    $grupos_respuestas = $participante->respuestas->groupBy('user_id')->take(4);
+                @endphp
 
+                @for($i = 1; $i <= 4; $i++)
+                    @if(isset($grupos_respuestas[$i]))
+                        @php
+                            $suma_calificaciones = $grupos_respuestas[$i]->sum('calificacion');
+                        @endphp
+                        <td>{{ $suma_calificaciones }}</td>
+                    @else
+                        <td>0</td>
+                    @endif
+                @endfor
+                <td>{{ $participante->respuestas->sum('calificacion') }}</td>
+                <td>{{ $participante->posicion }}</td>
+            </tr>
+        @endforeach
+        </tbody>
         <tfoot>
-        <tr>
-            <td colspan="3" class="text-center">
-                <strong>AVISO</strong>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3" class="text-center text-sm">
-                <strong>
-                    En tu próxima visita con este código QR podrás marcar tu entrada y salida, esto para reforzar medidas
-                    sanitarias y mejor control del acceso a este espacio, agradecemos tu cooperación y comprensión.
-                </strong>
-            </td>
-        </tr>
         </tfoot>
     </table>
 </main>
