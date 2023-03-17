@@ -15,6 +15,12 @@ class EncuestaIndex extends Component
 
     public $search;
 
+    public $editModal = false, $concurso, $estado_encuesta;
+    public $rules = [
+        'concurso.nombre_encuesta' => 'required',
+        'concurso.estado' => 'required',
+    ];
+
     public function changeEstado(Encuesta $encuesta)
     {
         try {
@@ -35,7 +41,33 @@ class EncuestaIndex extends Component
 
         $this->emit('render');
         $this->emit('alert-success', 'Estado de la encuesta cambiada con éxito');
+    }
 
+    public function edit(Encuesta $encuesta)
+    {
+        $this->concurso = $encuesta;
+        $this->estado_encuesta = $encuesta->estado;
+        $this->editModal = true;
+    }
+
+    public function update()
+    {
+        $this->validate();
+
+        try {
+            DB::beginTransaction();
+
+            $this->concurso->estado = $this->estado_encuesta;
+            $this->concurso->save();
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
+
+        $this->editModal = false;
+        $this->emit('render');
+        $this->emit('alert-success', 'Encuesta actualizada con éxito');
     }
 
     public function show(Encuesta $encuesta)
