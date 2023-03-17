@@ -43,6 +43,7 @@ class ParticipanteCreate extends Component
                 'encuesta_id' => $this->encuesta_id,
                 'representante' => $this->representante,
                 'organizacion' => $this->organizacion,
+                'posicion' => $this->posicion,
                 'telefono' => $this->telefono,
                 'tematica' => $this->tematica,
                 'descripcion' => $this->descripcion,
