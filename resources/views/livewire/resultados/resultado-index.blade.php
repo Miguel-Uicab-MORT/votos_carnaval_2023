@@ -42,12 +42,6 @@
                     </div>
                 </div>
             </div>
-
-            sudo mv ~/public_html /var/www/public_html
-            sudo chown -R www-data.www-data /var/www/public_html/storage
-            sudo chown -R www-data.www-data /var/www/public_html/bootstrap/cache
-            sudo nano /etc/nginx/sites-available/public_html
-            sudo ln -s /etc/nginx/sites-available/public_html /etc/nginx/sites-enabled/
             <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-4 md:grid-cols-4 md:gap-6 py-5">
                 @foreach($encuesta->participantes->sortByDesc(function($participante) { return $participante->respuestas->sum('calificacion');}) as $participante)
                     <div class="bg-white rounded-md shadow-lg p-3">
