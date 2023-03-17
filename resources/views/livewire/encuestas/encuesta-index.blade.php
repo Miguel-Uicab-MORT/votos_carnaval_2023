@@ -38,6 +38,9 @@
                                     @endswitch
                                 </td>
                                 <td class="flex justify-end">
+                                    <x-secondary-button wire:click="changeEstado({{$encuesta->id}})" wire:loading.attr="disabled">
+                                        Activar/Desactivar
+                                    </x-secondary-button>
                                     <x-button wire:click="edit({{ $encuesta->id }})" wire:loading.attr="disabled">
                                         Editar
                                     </x-button>
@@ -78,17 +81,6 @@
                 <x-label for="concurso.nombre_encuesta" :value="__('Nombre del concurso')" />
                 <x-input id="concurso.nombre_encuesta" class="block mt-1 w-full" type="text" wire:model="concurso.nombre_encuesta" />
                 @error('concurso.nombre_encuesta') <span class="error">{{ $message }}</span> @enderror
-            </div>
-            <div class="py-5">
-                <x-label value="Estado" />
-                <label for="default-toggle" x-data="{ estado_encuesta: @entangle('estado_encuesta') }" class="inline-flex relative items-center cursor-pointer">
-                    <input type="checkbox" value="1" x-model="estado_encuesta" name="estado" wire:model="concurso.estado" id="default-toggle" class="sr-only peer">
-                    <div class="form-input-check peer"></div>
-                    <span class="form-input-check-label" x-show="!estado_encuesta">No</span>
-                    <span class="form-input-check-label" x-show="estado_encuesta">Si</span>
-                </label>
-                <x-input-error for="descripcion_encuesta" />
-                @error('estado') <span class="error">{{ $message }}</span> @enderror
             </div>
         </x-slot>
         <x-slot name="footer">

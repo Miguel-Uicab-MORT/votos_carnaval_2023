@@ -26,9 +26,9 @@ class EncuestaIndex extends Component
         try {
             DB::beginTransaction();
 
-            if ($encuesta->estado) {
+            if ($encuesta->estado == Encuesta::Abierta) {
                 $encuesta->estado = Encuesta::Cerrada;
-            } else {
+            } elseif ($encuesta->estado== Encuesta::Cerrada) {
                 $encuesta->estado = Encuesta::Abierta;
             }
 
