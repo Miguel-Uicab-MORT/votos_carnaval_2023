@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('representante');
+            $table->string('organizacion');
             $table->string('telefono');
             $table->string('tematica');
             $table->string('numero_participantes')->nullable();

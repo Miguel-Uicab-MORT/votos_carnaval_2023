@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire\Participantes;
 
+use App\Models\Encuesta;
 use App\Models\Participante;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -12,10 +15,48 @@ class ParticipanteIndex extends Component
 
     protected $listeners = ['render', 'delete'];
     public $search;
+    public $encuestas=[];
+    public $participante;
+    public $editModal = false;
+    public $rules = [
+        'participante.nombre' => 'required',
+        'participante.representante' => 'required',
+        'participante.organizacion' => 'required',
+        'participante.telefono' => 'required',
+        'participante.tematica' => 'required',
+        'participante.descripcion' => 'required',
+        'participante.encuesta_id' => 'required',
+        'participante.numero_participantes' => 'nullable',
+        'participante.musica' => 'nullable',
+        'participante.duracion' => 'nullable',
+    ];
 
     public function updatingSearch()
     {
         $this->resetPage();
+    }
+
+    public function edit(Participante $participante)
+    {
+        $this->participante = $participante;
+        $this->validate();
+        $this->editModal = true;
+    }
+
+    public function update()
+    {
+        $this->validate();
+        try {
+            DB::beginTransaction();
+            $this->participante->save();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+        }
+        $this->editModal = false;
+        $this->emit('render');
+        $this->emit('alert-success', 'Participante actualizado con éxito');
     }
 
     public function delete(Participante $participante)
@@ -23,6 +64,11 @@ class ParticipanteIndex extends Component
         $participante->delete();
         $this->emit('render');
         $this->emit('alert-success', 'Participante eliminado con éxito');
+    }
+
+    public function mount()
+    {
+        $this->encuestas = Encuesta::where('estado', Encuesta::Abierta)->get();
     }
 
     public function render()

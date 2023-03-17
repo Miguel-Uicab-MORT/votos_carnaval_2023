@@ -18,7 +18,7 @@
 
                 <div class="">
                     <x-label for="encuesta_id" :value="__('Concurso*')" />
-                    <select wire:model="encuesta_id" class="block mt-1 w-full">
+                    <select wire:model="encuesta_id" class="block mt-1 w-full form-input-select">
                         <option value="">Seleccione una encuesta</option>
                         @foreach($encuestas as $encuesta)
                             <option value="{{ $encuesta->id }}">{{ $encuesta->nombre_encuesta }}</option>
@@ -31,6 +31,12 @@
                     <x-label for="representante" :value="__('Representante*')" />
                     <x-input id="representante" class="block mt-1 w-full" type="text" wire:model="representante" />
                     @error('representante') <span class="error">{{ $message }}</span> @enderror
+                </div>
+
+                <div class="">
+                    <x-label for="organiazcion" :value="__('Organización*')" />
+                    <x-input id="organiazcion" class="block mt-1 w-full" type="text" wire:model="organiazcion" />
+                    @error('organiazcion') <span class="error">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="">
