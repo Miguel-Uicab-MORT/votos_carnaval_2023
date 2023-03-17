@@ -9,7 +9,7 @@ use Livewire\Component;
 class EncuestaCreate extends Component
 {
     public $showModal = false;
-    public $nombre_encuesta, $estado = false;
+    public $nombre_encuesta, $estado = true;
 
     public function showModal()
     {
