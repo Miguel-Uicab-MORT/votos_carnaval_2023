@@ -111,10 +111,9 @@
                 <th rowspan="2">LUGAR</th>
             </tr>
             <tr>
-                <th>KAREN VEGA LUCAS</th>
-                <th>LAURA CANO</th>
-                <th>GABRIELA MENDOZA</th>
-                <th>MISAEL LANDA</th>
+                @foreach($encuesta->users as $user)
+                    <th>{{ $user->name }}</th>
+                @endforeach
             </tr>
         </thead>
         <tbody>

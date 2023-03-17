@@ -28,4 +28,9 @@ class Encuesta extends Model
         return $this->hasMany(Pregunta::class);
     }
 
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
 }

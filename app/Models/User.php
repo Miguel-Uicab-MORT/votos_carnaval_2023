@@ -61,6 +61,11 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    public function encuesta()
+    {
+        return $this->belongsTo(Encuesta::class);
+    }
+
     public function respuestas()
     {
         return $this->hasMany(Respuesta::class);
