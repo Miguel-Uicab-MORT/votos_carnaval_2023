@@ -19,6 +19,7 @@
                     <tr>
                         <th>Posición</th>
                         <th>Nombre</th>
+                        <th>Participantes</th>
                         <th>Evento</th>
                         <th>Organización</th>
                         <th>Representante</th>
@@ -32,6 +33,7 @@
                             <tr>
                                 <td>{{ $participante->posicion }}</td>
                                 <td>{{ $participante->nombre }}</td>
+                                <td>{{ $participante->numero_participantes }}</td>
                                 <td>{{ $participante->encuesta->nombre_encuesta }}</td>
                                 <td>{{ $participante->organizacion }}</td>
                                 <td>{{ $participante->representante }}</td>
@@ -49,14 +51,14 @@
                         @endforeach
                     </tbody>
                     <tfoot>
-                        <td colspan="7">
+                        <td colspan="8">
                             {{ $participantes->links() }}
                         </td>
                     </tfoot>
                 @else
                     <tfoot>
                         <tr>
-                            <td colspan="7">
+                            <td colspan="8">
                                 <div class="flex justify-center">
                                     <span>No hay registros</span>
                                 </div>
