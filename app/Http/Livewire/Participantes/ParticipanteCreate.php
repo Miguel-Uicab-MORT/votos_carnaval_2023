@@ -12,7 +12,7 @@ class ParticipanteCreate extends Component
 {
     public $createModal = false;
 
-    public $nombre, $encuesta_id, $representante, $organizacion, $telefono, $tematica, $numero_participantes, $musica, $duracion, $descripcion;
+    public $nombre, $encuesta_id, $representante, $posicion, $organizacion, $telefono, $tematica, $numero_participantes, $musica, $duracion, $descripcion;
 
     public function showCreateModal()
     {
@@ -28,6 +28,7 @@ class ParticipanteCreate extends Component
         $this->validate([
             'nombre' => 'required',
             'encuesta_id' => 'required',
+            'posicion' => 'required',
             'representante' => 'required',
             'organizacion' => 'required',
             'telefono' => 'required',

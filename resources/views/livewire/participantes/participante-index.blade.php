@@ -17,6 +17,7 @@
             <table class="tables">
                 <thead>
                     <tr>
+                        <th>Posición</th>
                         <th>Nombre</th>
                         <th>Evento</th>
                         <th>Representante</th>
@@ -28,6 +29,7 @@
                     <tbody>
                         @foreach($participantes as $participante)
                             <tr>
+                                <td>{{ $participante->posicion }}</td>
                                 <td>{{ $participante->nombre }}</td>
                                 <td>{{ $participante->encuesta->nombre_encuesta }}</td>
                                 <td>{{ $participante->representante }}</td>
@@ -46,7 +48,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="5">
+                            <td colspan="6">
                                 {{ $participantes->links() }}
                             </td>
                         </tr>
@@ -54,7 +56,7 @@
                 @else
                     <tfoot>
                         <tr>
-                            <td colspan="5">
+                            <td colspan="6">
                                 <div class="flex justify-center">
                                     <span>No hay registros</span>
                                 </div>
@@ -87,6 +89,12 @@
                         @endforeach
                     </select>
                     @error('encuesta_id') <span class="error">{{ $message }}</span> @enderror
+                </div>
+
+                <div class="">
+                    <x-label for="posicion" :value="__('Posición*')" />
+                    <x-input id="posicion" class="block mt-1 w-full" type="number" wire:model="participante.posicion" />
+                    @error('posicion') <span class="error">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="">

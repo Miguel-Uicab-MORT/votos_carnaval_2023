@@ -20,6 +20,7 @@ class ParticipanteIndex extends Component
     public $editModal = false;
     public $rules = [
         'participante.nombre' => 'required',
+        'participante.posicion' => 'required',
         'participante.representante' => 'required',
         'participante.organizacion' => 'nullable',
         'participante.telefono' => 'required',
