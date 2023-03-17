@@ -76,7 +76,7 @@ class ParticipanteIndex extends Component
     {
         $participantes = Participante::where('nombre', 'LIKE', "%{$this->search}%")
             ->orderBy('posicion', 'ASC')
-            ->paginate(15);
+            ->paginate(10);
 
         return view('livewire.participantes.participante-index', compact('participantes'));
     }
