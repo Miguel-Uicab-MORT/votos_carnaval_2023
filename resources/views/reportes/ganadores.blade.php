@@ -123,7 +123,6 @@
                 @else
                     <td colspan="{{ $encuesta->users->count()+2 }}">SOLO EXHIBICIÓN</td>
                 @endif
-
             </tr>
             @endforeach
         </tbody>

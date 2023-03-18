@@ -22,12 +22,7 @@ class VotoParticipante extends Component
     {
         $participantes = Participante::where('encuesta_id', $this->encuesta->id)
             ->where('tipo', Participante::PARTICIPANTE)
-            ->whereNotIn('id', function ($query) {
-            $query->select('participante_id')
-                ->from('respuestas')
-                ->where('user_id', $this->user_id)
-                ->groupBy('participante_id');
-        })->get();
+            ->get();
         return view('livewire.votos.voto-participante', compact('participantes'));
     }
 }

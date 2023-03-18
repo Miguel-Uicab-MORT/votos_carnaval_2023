@@ -21,6 +21,18 @@ class VotoPreguntas extends Component
         $this->participante = $participante;
         $this->encuesta = $participante->encuesta;
         $this->preguntas = $this->encuesta->preguntas;
+        $this->calificaciones = array_fill(0, count($this->preguntas), 0);
+
+        $resueltas = Respuesta::where('user_id', Auth::id())
+            ->where('participante_id', $this->participante->id)
+            ->get();
+
+        if ($resueltas) {
+            foreach ($resueltas as $resuelta) {
+                $this->calificaciones[$resuelta->pregunta_id - 1] = $resuelta->calificacion;
+            }
+        }
+
     }
 
     public function guardarCalificaciones()
@@ -31,6 +43,12 @@ class VotoPreguntas extends Component
             foreach ($this->preguntas as $pregunta) {
                 Log::debug($pregunta->id);
                 $calificacion = $this->calificaciones[$i];
+
+                if ($calificacion > 10) {
+                    $calificacion = 10;
+                } elseif ($calificacion < 0) {
+                    $calificacion = 0;
+                }
 
                 $respuesta = new Respuesta();
                 $respuesta->user_id = Auth::id();
