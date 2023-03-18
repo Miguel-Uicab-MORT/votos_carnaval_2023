@@ -122,7 +122,8 @@
                 <tr>
                     <td>{{ $participante->posicion }}</td>
                     <td>{{ $participante->nombre }}</td>
-                    @if($participante->respuestas->count() > 0)
+                    @if($participante->tipo == 2)
+                        @if($participante->respuestas->count() > 0)
                         @php($total = 0)
                         @foreach($participante->respuestas as $respuesta)
                             <td>{{ $respuesta->calificacion }}</td>
@@ -130,7 +131,10 @@
                         @endforeach
                         <td>{{ $total }}</td>
                     @else
-                        <td colspan="{{ $preguntas->count() + 1 }}">No hay respuestas</td>
+                            <td colspan="{{ $preguntas->count() + 1 }}">No hay respuestas</td>
+                        @endif
+                    @else
+                        <td colspan="{{ $preguntas->count() + 1 }}">PARTICIPANTE DE EXHIBICIÓN</td>
                     @endif
                 </tr>
             @endforeach

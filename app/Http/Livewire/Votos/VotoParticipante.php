@@ -20,7 +20,9 @@ class VotoParticipante extends Component
 
     public function render()
     {
-        $participantes = Participante::where('encuesta_id', $this->encuesta->id)->whereNotIn('id', function ($query) {
+        $participantes = Participante::where('encuesta_id', $this->encuesta->id)
+            ->where('tipo', Participante::PARTICIPANTE)
+            ->whereNotIn('id', function ($query) {
             $query->select('participante_id')
                 ->from('respuestas')
                 ->where('user_id', $this->user_id)
