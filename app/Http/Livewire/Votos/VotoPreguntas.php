@@ -25,31 +25,29 @@ class VotoPreguntas extends Component
 
     public function guardarCalificaciones()
     {
-        foreach ($this->preguntas as $pregunta) {
-            $this->validate([
-                'calificaciones.' . ($pregunta->id-1) => 'required|numeric|min:0|max:10'
-            ]);
-        }
         try {
             DB::beginTransaction();
+            $i = 0;
             foreach ($this->preguntas as $pregunta) {
-                $calificacion = $this->calificaciones[$pregunta->id-1];
-                if (is_null($calificacion))
-                    $calificacion = 0;
+                Log::debug($pregunta->id);
+                $calificacion = $this->calificaciones[$i];
 
                 $respuesta = new Respuesta();
                 $respuesta->user_id = Auth::id();
                 $respuesta->participante_id = $this->participante->id;
                 $respuesta->pregunta_id = $pregunta->id;
-                $respuesta->calificacion = $calificacion;
+                $respuesta->calificacion = intval($calificacion);
+                Log::debug($respuesta);
                 $respuesta->save();
+
+                $i++;
             }
             DB::commit();
+            return redirect()->route('votos.participante', $this->encuesta);
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
         }
-        return redirect()->route('votos.participante', $this->encuesta);
     }
     public function render()
     {

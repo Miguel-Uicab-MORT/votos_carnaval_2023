@@ -11,9 +11,9 @@
             <x-btn-print-ticket  href="{{route('ganadores', $id_encuesta)}}" >
                 Resultado por Jueces
             </x-btn-print-ticket>
-            <x-btn-print-ticket class="ml-2" href="{{route('resultados')}}" >
+            <x-button class="ml-2" wire:click="filterResult" >
                 Descargar resultados
-            </x-btn-print-ticket>
+            </x-button>
         </div>
 
         <div class="flex items-center p-4">
@@ -73,4 +73,29 @@
             </div>
         @endforeach
     </div>
+
+    <x-dialog-modal wire:model="openFilterResultModal">
+        <x-slot name="title">
+            {{ __('Filtro de reporte de resultados') }}
+        </x-slot>
+        <x-slot name="content">
+                <div class="flex flex-col">
+                    <x-label for="id_encuesta" :value="__('Votante')" />
+                    <select class="form-input-select flex-1" wire:model="id_user">
+                        @foreach($usuarios as $usuario)
+                            <option value="{{ $usuario->id }}">{{ $usuario->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+        </x-slot>
+        <x-slot name="footer">
+            <x-secondary-button wire:click="$set('openFilterResultModal', false)" wire:loading.attr="disabled">
+                {{ __('Cerrar') }}
+            </x-secondary-button>
+            <x-button class="ml-2" wire:click="filterResultByUser" wire:loading.attr="disabled">
+                {{ __('Filtrar') }}
+            </x-button>
+
+        </x-slot>
+    </x-dialog-modal>
 </div>

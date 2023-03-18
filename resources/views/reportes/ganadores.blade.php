@@ -27,27 +27,17 @@
             width: auto;
         }
 
-        /* Estilos para la información del negocio */
-        .info-negocio {
-            float: right;
-            text-align: right;
-        }
-
         .info-negocio p {
             margin: 0;
             line-height: 1;
         }
         .text-center {
+            margin: 0;
+            font-size: 1.0rem; /* Letras lg */
+            padding: 0.2rem;
             text-align: center;
-        }
+            font-weight: bold;
 
-        .text-sm {
-            font-size: small;
-        }
-
-        .justify-center-img {
-            display: inline-block;
-            vertical-align: middle;
         }
 
         .tables {
@@ -62,15 +52,16 @@
         }
 
         .tables thead th {
-            font-size: 1.2rem; /* Letras md */
+            font-size: 0.8rem; /* Letras md */
             font-weight: bold;
             text-align: center;
         }
 
         .tables tbody td {
-            font-size: .8 rem; /* Letras sm */
+            font-size: 0.5rem; /* Letras sm */
             font-weight: bold;
             padding: 0.5rem;
+            text-align: center;
         }
 
         .tables tbody td:first-child,
@@ -90,15 +81,15 @@
 
 <main>
     <div>
-        <h3 class="text-center">
+        <div class="text-center">
             CARNVAL ZIHUATANEJO 2023
-        </h3>
-        <h3 class="text-center">
+        </div>
+        <div class="text-center">
             EVALUACIÓN DE {{$encuesta->nombre_encuesta}}
-        </h3>
-        <h3 class="text-center">
+        </div>
+        <div class="text-center">
             FORMATO DE RESULTADOS DEL JURADO
-        </h3>
+        </div>
     </div>
 
     <table class="tables">
@@ -117,26 +108,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($participantes->sortBy('posicion') as $participante)
+        @foreach($participantes->sortBy(function($participante) {return -1 * $participante->respuestas->sum('calificacion');}) as $participante)
                 <tr>
                     <td>{{ $participante->posicion }}</td>
                     <td>{{ $participante->nombre }}</td>
-                    @php
-                        $grupos_respuestas = $participante->respuestas->groupBy('user_id')->take(4);
-                    @endphp
-
-                    @for($i = 1; $i <= 4; $i++)
-                        @if(isset($grupos_respuestas[$i]))
-                            @php
-                                $suma_calificaciones = $grupos_respuestas[$i]->sum('calificacion');
-                            @endphp
-                            <td>{{ $suma_calificaciones }}</td>
-                        @else
-                            <td>0</td>
-                        @endif
-                    @endfor
+                    @foreach($encuesta->users as $user)
+                        <td>{{ $participante->respuestas->where('user_id', $user->id)->sum('calificacion') }}</td>
+                    @endforeach
                     <td>{{ $participante->respuestas->sum('calificacion') }}</td>
-                    <td>{{ $participante->posicion }}</td>
+                    <td>{{ $loop->iteration }}</td>
                 </tr>
             @endforeach
         </tbody>

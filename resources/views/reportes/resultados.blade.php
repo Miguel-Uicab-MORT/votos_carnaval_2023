@@ -38,7 +38,12 @@
             line-height: 1;
         }
         .text-center {
+            margin: 0;
+            font-size: 1.0rem; /* Letras lg */
+            padding: 0.2rem;
             text-align: center;
+            font-weight: bold;
+
         }
 
         .text-sm {
@@ -50,8 +55,39 @@
             vertical-align: middle;
         }
 
-        .tables thead {
-            background: #e1effe;
+        .tables {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 1px solid black;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid;
+        }
+
+        .tables thead th {
+            font-size: 0.8rem; /* Letras md */
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .tables tbody td {
+            font-size: 0.5rem; /* Letras sm */
+            font-weight: bold;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        .tables tbody td:first-child,
+        .tables tbody td:last-child {
+            background-color: black;
+            color: white;
+        }
+
+        .tables tbody td:not(:first-child):not(:last-child) {
+            background-color: white;
+            color: black;
         }
     </style>
 </head>
@@ -60,53 +96,46 @@
 
 <main>
     <div>
-        <h3 class="text-center">
-            Tarjeta de cliente
-        </h3>
+        <div class="text-center">
+            CARNVAL ZIHUATANEJO 2023
+        </div>
+        <div class="text-center">
+            EVALUACIÓN DEl JUEZ {{$usuario->name}}
+        </div>
+        <div class="text-center">
+            FORMATO DE RESULTADOS DEL JURADO
+        </div>
     </div>
 
     <table class="tables">
         <thead>
         <tr>
-            <th rowspan="2">No</th>
-            <th rowspan="2">Carro</th>
-            <th colspan="4">Jueces</th>
-            <th rowspan="2">Suma</th>
-            <th rowspan="2">Lugar</th>
-        </tr>
-        <tr>
-            <th>Juez 1</th>
-            <th>Juez 2</th>
-            <th>Juez 3</th>
-            <th>Juez 4</th>
+            <th>No</th>
+            <th>Participante</th>
+            @foreach($preguntas as $pregunta)
+                <th colspan>{{ $pregunta->nombre_pregunta }}</th>
+            @endforeach
+            <th>Total</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($participantes->sortBy('posicion') as $participante)
-            <tr>
-                <td>{{ $participante->posicion }}</td>
-                <td>{{ $participante->nombre }}</td>
-                @php
-                    $grupos_respuestas = $participante->respuestas->groupBy('user_id')->take(4);
-                @endphp
-
-                @for($i = 1; $i <= 4; $i++)
-                    @if(isset($grupos_respuestas[$i]))
-                        @php
-                            $suma_calificaciones = $grupos_respuestas[$i]->sum('calificacion');
-                        @endphp
-                        <td>{{ $suma_calificaciones }}</td>
+            @foreach($participantes as $participante)
+                <tr>
+                    <td>{{ $participante->posicion }}</td>
+                    <td>{{ $participante->nombre }}</td>
+                    @if($participante->respuestas->count() > 0)
+                        @php($total = 0)
+                        @foreach($participante->respuestas as $respuesta)
+                            <td>{{ $respuesta->calificacion }}</td>
+                            @php($total += $respuesta->calificacion)
+                        @endforeach
+                        <td>{{ $total }}</td>
                     @else
-                        <td>0</td>
+                        <td colspan="{{ $preguntas->count() + 1 }}">No hay respuestas</td>
                     @endif
-                @endfor
-                <td>{{ $participante->respuestas->sum('calificacion') }}</td>
-                <td>{{ $participante->posicion }}</td>
-            </tr>
-        @endforeach
+                </tr>
+            @endforeach
         </tbody>
-        <tfoot>
-        </tfoot>
     </table>
 </main>
 </body>
