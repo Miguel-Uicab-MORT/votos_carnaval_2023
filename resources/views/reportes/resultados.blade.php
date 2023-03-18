@@ -43,7 +43,6 @@
             padding: 0.2rem;
             text-align: center;
             font-weight: bold;
-
         }
 
         .text-sm {
@@ -67,7 +66,7 @@
         }
 
         .tables thead th {
-            font-size: 0.8rem; /* Letras md */
+            font-size: 0.5rem; /* Letras md */
             font-weight: bold;
             text-align: center;
         }
