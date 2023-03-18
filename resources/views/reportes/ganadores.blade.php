@@ -108,16 +108,23 @@
             </tr>
         </thead>
         <tbody>
+        @php($ranking = 1)
         @foreach($participantes->sortBy(function($participante) {return -1 * $participante->respuestas->sum('calificacion');}) as $participante)
-                <tr>
-                    <td>{{ $participante->posicion }}</td>
-                    <td>{{ $participante->nombre }}</td>
+            <tr>
+                <td>{{ $participante->posicion }}</td>
+                <td>{{ $participante->nombre }}</td>
+                @if($participante->tipo == 2)
                     @foreach($encuesta->users as $user)
                         <td>{{ $participante->respuestas->where('user_id', $user->id)->sum('calificacion') }}</td>
                     @endforeach
                     <td>{{ $participante->respuestas->sum('calificacion') }}</td>
-                    <td>{{ $loop->iteration }}</td>
-                </tr>
+                    <td>{{ $ranking }}</td>
+                    @php($ranking++)
+                @else
+                    <td colspan="{{ $encuesta->users->count()+2 }}">SOLO EXHIBICIÓN</td>
+                @endif
+
+            </tr>
             @endforeach
         </tbody>
     </table>

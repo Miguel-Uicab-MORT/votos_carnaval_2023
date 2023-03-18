@@ -99,7 +99,7 @@
             CARNVAL ZIHUATANEJO 2023
         </div>
         <div class="text-center">
-            EVALUACIÓN DEl JUEZ {{$usuario->name}}
+            EVALUACIÓN DEL JUEZ {{$usuario->name}}
         </div>
         <div class="text-center">
             FORMATO DE RESULTADOS DEL JURADO
