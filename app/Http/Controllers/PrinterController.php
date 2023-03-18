@@ -15,7 +15,7 @@ class PrinterController extends Controller
         $encuesta = \App\Models\Encuesta::find($encuesta_id);
         $participantes = \App\Models\Participante::where('encuesta_id', $encuesta->id)->get();
         $pdf = \PDF::loadView('reportes.ganadores', compact('participantes', 'encuesta')); // genera el PDF
-        return $pdf->stream('hoja_resultados.pdf'); // devuelve el PDF para su descarga
+        return $pdf->download('hoja_resultados.pdf'); // devuelve el PDF para su descarga
     }
 
     public function resultados(User $usuario)
@@ -24,6 +24,6 @@ class PrinterController extends Controller
         $preguntas = Pregunta::where('encuesta_id', $encuestas->id)->get();
         $participantes = \App\Models\Participante::where('encuesta_id', $encuestas->id)->get();
         $pdf = \PDF::loadView('reportes.resultados', compact('usuario', 'encuestas', 'preguntas', 'participantes')); // genera el PDF
-        return $pdf->stream('hoja_resultados.pdf'); // devuelve el PDF para su descarga
+        return $pdf->download('hoja_resultados.pdf'); // devuelve el PDF para su descarga
     }
 }
