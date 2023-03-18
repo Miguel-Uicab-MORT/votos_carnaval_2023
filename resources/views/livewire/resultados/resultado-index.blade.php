@@ -82,6 +82,7 @@
                 <div class="flex flex-col">
                     <x-label for="id_encuesta" :value="__('Votante')" />
                     <select class="form-input-select flex-1" wire:model="id_user">
+                        <option value="">Seleccione un votante</option>
                         @foreach($usuarios as $usuario)
                             <option value="{{ $usuario->id }}">{{ $usuario->name }}</option>
                         @endforeach
