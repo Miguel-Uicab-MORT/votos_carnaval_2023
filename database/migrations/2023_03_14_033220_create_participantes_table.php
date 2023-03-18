@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->integer('posicion')->nullable();
+            $table->integer('tipo');
             $table->string('representante');
             $table->string('organizacion');
             $table->string('telefono');

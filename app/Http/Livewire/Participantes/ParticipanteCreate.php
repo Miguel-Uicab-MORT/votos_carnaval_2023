@@ -12,14 +12,14 @@ class ParticipanteCreate extends Component
 {
     public $createModal = false;
 
-    public $nombre, $encuesta_id, $representante, $posicion, $organizacion, $telefono, $tematica, $numero_participantes, $musica, $duracion, $descripcion;
+    public $nombre, $encuesta_id, $representante, $posicion, $organizacion, $telefono, $tematica, $numero_participantes, $musica, $duracion, $descripcion, $tipo;
 
     public function showCreateModal()
     {
         if ($this->createModal) {
             $this->createModal = false;
         } else {
-            $this->reset(['nombre', 'encuesta_id', 'representante', 'posicion', 'organizacion', 'telefono', 'tematica', 'numero_participantes', 'musica', 'duracion', 'descripcion']);
+            $this->reset(['nombre', 'encuesta_id', 'representante', 'posicion', 'organizacion', 'telefono', 'tematica', 'numero_participantes', 'musica', 'duracion', 'descripcion', 'tipo']);
             $this->createModal = true;
         }
     }
@@ -34,6 +34,7 @@ class ParticipanteCreate extends Component
             'organizacion' => 'required',
             'telefono' => 'required',
             'tematica' => 'required',
+            'tipo' => 'required',
         ]);
 
         try {
@@ -51,6 +52,7 @@ class ParticipanteCreate extends Component
                 'numero_participantes' => $this->numero_participantes,
                 'musica' => $this->musica,
                 'duracion' => $this->duracion,
+                'tipo' => $this->tipo,
             ]);
 
             $this->emit('alert-success', 'Participante creado con éxito');

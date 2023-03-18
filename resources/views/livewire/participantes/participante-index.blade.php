@@ -83,6 +83,12 @@
                 </div>
 
                 <div class="">
+                    <x-label for="posicion" :value="__('Posición*')" />
+                    <x-input id="posicion" class="block mt-1 w-full" type="number" wire:model="participante.posicion" />
+                    @error('participante.posicion') <span class="error">{{ $message }}</span> @enderror
+                </div>
+
+                <div class="">
                     <x-label for="encuesta_id" :value="__('Concurso*')" />
                     <select wire:model="participante.encuesta_id" class="block mt-1 w-full form-input-select">
                         <option value="">Seleccione una encuesta</option>
@@ -94,9 +100,13 @@
                 </div>
 
                 <div class="">
-                    <x-label for="posicion" :value="__('Posición*')" />
-                    <x-input id="posicion" class="block mt-1 w-full" type="number" wire:model="participante.posicion" />
-                    @error('posicion') <span class="error">{{ $message }}</span> @enderror
+                    <x-label for="participante.tipo" :value="__('Tipo*')" />
+                    <select wire:model="participante.tipo" class="block mt-1 w-full form-input-select">
+                        <option value="">Seleccione tipo de participanción</option>
+                        <option value="1">Participante de exhibición</option>
+                        <option value="2">Concursante</option>
+                    </select>
+                    @error('participante.tipo') <span class="error">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="">

@@ -30,6 +30,7 @@ class ParticipanteIndex extends Component
         'participante.numero_participantes' => 'nullable',
         'participante.musica' => 'nullable',
         'participante.duracion' => 'nullable',
+        'participante.tipo' => 'required',
     ];
 
     public function updatingSearch()

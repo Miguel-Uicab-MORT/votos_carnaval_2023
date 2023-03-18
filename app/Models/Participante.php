@@ -9,6 +9,9 @@ class Participante extends Model
 {
     use HasFactory;
 
+    const EXHIBICION = 1;
+    const PARTICIPANTE = 2;
+
     protected $guarded = [
         'id',
         'created_at',

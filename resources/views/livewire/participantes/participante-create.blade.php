@@ -34,6 +34,16 @@
                 </div>
 
                 <div class="">
+                    <x-label for="tipo" :value="__('Tipo*')" />
+                    <select wire:model="tipo" class="block mt-1 w-full form-input-select">
+                        <option value="">Seleccione tipo de participanción</option>
+                        <option value="1">Participante de exhibición</option>
+                        <option value="2">Concursante</option>
+                    </select>
+                    @error('tipo') <span class="error">{{ $message }}</span> @enderror
+                </div>
+
+                <div class="">
                     <x-label for="representante" :value="__('Representante*')" />
                     <x-input id="representante" class="block mt-1 w-full" type="text" wire:model="representante" />
                     @error('representante') <span class="error">{{ $message }}</span> @enderror
