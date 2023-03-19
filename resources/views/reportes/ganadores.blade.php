@@ -96,7 +96,7 @@
         <thead>
             <tr>
                 <th rowspan="2">N°</th>
-                <th rowspan="2">COMPARSA</th>
+                <th rowspan="2">{{$encuesta->nombre_encuesta}}</th>
                 <th colspan="4">JUEZ</th>
                 <th rowspan="2">SUMA</th>
                 <th rowspan="2">LUGAR</th>

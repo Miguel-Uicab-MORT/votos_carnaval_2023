@@ -1,10 +1,10 @@
 <div class="container mx-auto">
     <x-slot name="header">
 
-        <div>
-            <x-secondary-button wire:click="volver" wire:loading.attr="disabled">
-                Volver
-            </x-secondary-button>
+        <div class="flex justify-end">
+            <x-btn-print-ticket href="{{route('votos.participante', $participante->encuesta)}}">
+                {{ __('Regresar') }}
+            </x-btn-print-ticket>
         </div>
 
         <h2 class="font-semibold text-md text-gray-800 leading-tight">

@@ -1,19 +1,26 @@
 <div class="container mx-auto">
     <x-slot name="header">
+        <div class="flex justify-between">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Resultados') }}
             </h2>
+            <div>
+                <x-btn-print-ticket href="{{route('dashboard')}}">
+                    {{ __('Regresar') }}
+                </x-btn-print-ticket>
+            </div>
+        </div>
     </x-slot>
 
     <div class="p-5">
-
-        <div class="flex justify-between">
-            <x-btn-print-ticket  href="{{route('ganadores', $id_encuesta)}}" >
-                Resultado por Jueces
-            </x-btn-print-ticket>
-            <x-button class="ml-2" wire:click="filterResult" >
-                Descargar resultados
-            </x-button>
+            <div>
+                <x-btn-print-ticket  href="{{route('ganadores', $id_encuesta)}}" >
+                    Resultado por Jueces
+                </x-btn-print-ticket>
+                <x-button class="ml-2" wire:click="filterResult" >
+                    Descargar resultados
+                </x-button>
+            </div>
         </div>
 
         <div class="flex items-center p-4">

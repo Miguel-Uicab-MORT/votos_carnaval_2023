@@ -65,6 +65,13 @@
             border: 1px solid;
         }
 
+        .table{
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 1px solid black;
+            width: 100%;
+        }
+
         .tables thead th {
             font-size: 0.5rem; /* Letras md */
             font-weight: bold;
@@ -140,6 +147,23 @@
             @endforeach
         </tbody>
     </table>
+
+    <div>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>Fecha</td>
+                    <td>{{now()->format('d-m-Y')}}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Lugar</td>
+                    <td>Zihuatanejo de Azueta Guerrero</td>
+                    <td>Firma del juez</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </main>
 </body>
 
