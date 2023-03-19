@@ -50,15 +50,24 @@ class VotoPreguntas extends Component
                     $calificacion = 0;
                 }
 
-                $respuesta = new Respuesta();
-                $respuesta->user_id = Auth::id();
-                $respuesta->participante_id = $this->participante->id;
-                $respuesta->pregunta_id = $pregunta->id;
-                $respuesta->calificacion = intval($calificacion);
-                Log::debug($respuesta);
-                $respuesta->save();
+                $respuesta = Respuesta::where('user_id', Auth::id())
+                    ->where('participante_id', $this->participante->id)
+                    ->where('pregunta_id', $pregunta->id)
+                    ->first();
 
-                $i++;
+                if ($respuesta) {
+                    $respuesta->calificacion = intval($calificacion);
+                    $respuesta->save();
+                    $i++;
+                } else {
+                    $respuesta = new Respuesta();
+                    $respuesta->user_id = Auth::id();
+                    $respuesta->participante_id = $this->participante->id;
+                    $respuesta->pregunta_id = $pregunta->id;
+                    $respuesta->calificacion = intval($calificacion);
+                    $respuesta->save();
+                    $i++;
+                }
             }
             DB::commit();
             return redirect()->route('votos.participante', $this->encuesta);
