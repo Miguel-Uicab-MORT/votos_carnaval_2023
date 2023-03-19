@@ -21,7 +21,7 @@ class VotoPreguntas extends Component
         $this->participante = $participante;
         $this->encuesta = $participante->encuesta;
         $this->preguntas = $this->encuesta->preguntas;
-        $this->calificaciones = array_fill(0, count($this->preguntas), 0);
+        $this->calificaciones = array_fill(0, count($this->preguntas), null);
 
         $resueltas = Respuesta::where('user_id', Auth::id())
             ->where('participante_id', $this->participante->id)
@@ -46,7 +46,7 @@ class VotoPreguntas extends Component
 
                 if ($calificacion > 10) {
                     $calificacion = 10;
-                } elseif ($calificacion < 0) {
+                } elseif ($calificacion < 0 || $calificacion == null) {
                     $calificacion = 0;
                 }
 
