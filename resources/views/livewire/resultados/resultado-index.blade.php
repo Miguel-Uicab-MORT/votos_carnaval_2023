@@ -60,6 +60,12 @@
                         </div>
                         <div class="flex">
                             <div class="flex flex-col">
+                                <span class="text-md font-bold text-gray-500">Posición:</span>
+                                <span class="text-sm text-gray-700">{{ $participante->posicion }}</span>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="flex flex-col">
                                 <span class="text-md font-bold text-gray-500">Representante:</span>
                                 <span class="text-sm text-gray-700">{{ $participante->representante }}</span>
                             </div>
