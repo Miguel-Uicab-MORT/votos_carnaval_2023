@@ -76,6 +76,11 @@ class VotoPreguntas extends Component
             Log::error($e->getMessage());
         }
     }
+
+    public function volver()
+    {
+        return redirect()->route('votos.participante', $this->encuesta);
+    }
     public function render()
     {
         return view('livewire.votos.voto-preguntas');
