@@ -29,6 +29,9 @@
                                 @foreach($respuestas as $respuesta)
                                     @if($respuesta->user_id == $usuario->id && $respuesta->pregunta_id == $pregunta->id)
                                         {{ $respuesta->calificacion }}
+                                        <x-secondary-button wire:click="edit({{$respuesta}})">
+                                            Editar
+                                        </x-secondary-button>
                                     @endif
                                 @endforeach
                             </td>
@@ -38,7 +41,30 @@
 
                 </tbody>
             </table>
-
         </x-table>
     </div>
+
+    <x-dialog-modal wire:model="modalEdit">
+        <x-slot name="title">
+            Editar calificación
+        </x-slot>
+
+        <x-slot name="content">
+            <div class="mt-4">
+                <x-label for="calificacion" :value="__('Calificación')" />
+                <x-input id="calificacion" class="block mt-1 w-full" type="number" min="1" max="10" wire:model="calificacion_selected" />
+                @error('calificacion') <span class="error">{{ $message }}</span> @enderror
+            </div>
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-secondary-button wire:click="$set('modalEdit', false)">
+                Cancelar
+            </x-secondary-button>
+
+            <x-button class="ml-2" wire:click="update">
+                Actualizar
+            </x-button>
+        </x-slot>
+    </x-dialog-modal>
 </div>
