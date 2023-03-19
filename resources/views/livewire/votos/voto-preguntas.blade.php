@@ -64,6 +64,7 @@
                     </div>
                     <div class="flex justify-center items-center" wire:key="pregunta-{{$pregunta->id}}">
                         <select class="form-input-select" wire:model="calificaciones.{{$index}}">
+                            <option value="">Seleccione una calificación</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
