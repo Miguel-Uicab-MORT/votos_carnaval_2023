@@ -47,7 +47,26 @@
                         @endforeach
                     </tr>
                 @endforeach
-
+                    <tr>
+                        <td>
+                            <b>CALIFICACIÓN FINAL</b>
+                        </td>
+                        @foreach($usuarios as $usuario)
+                            <td class="text-center">
+                                @php
+                                    $calificacion = 0; // reiniciar la variable para cada usuario
+                                @endphp
+                                @foreach($respuestas as $respuesta)
+                                    @if($respuesta->user_id == $usuario->id)
+                                        @php
+                                            $calificacion += $respuesta->calificacion;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                {{ $calificacion }}
+                            </td>
+                        @endforeach
+                    </tr>
                 </tbody>
             </table>
         </x-table>

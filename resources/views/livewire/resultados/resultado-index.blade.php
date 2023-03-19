@@ -66,6 +66,12 @@
                         </div>
                         <div class="flex">
                             <div class="flex flex-col">
+                                <span class="text-md font-bold text-gray-500">Organización:</span>
+                                <span class="text-sm text-gray-700">{{ $participante->organizacion }}</span>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="flex flex-col">
                                 <span class="text-md font-bold text-gray-500">Puntaje:</span>
                                 <span class="font-bold text-gray-700">{{ $participante->respuestas->sum('calificacion') }}</span>
                             </div>
