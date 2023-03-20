@@ -21,15 +21,17 @@ class VotoPreguntas extends Component
         $this->participante = $participante;
         $this->encuesta = $participante->encuesta;
         $this->preguntas = $this->encuesta->preguntas;
-        $this->calificaciones = array_fill(0, count($this->preguntas), null);
+        $this->calificaciones = array_fill(0, count($this->preguntas), 1);
 
         $resueltas = Respuesta::where('user_id', Auth::id())
             ->where('participante_id', $this->participante->id)
             ->get();
 
+        $i = 0;
         if ($resueltas) {
             foreach ($resueltas as $resuelta) {
-                $this->calificaciones[$resuelta->pregunta_id - 1] = $resuelta->calificacion;
+                $this->calificaciones[$i] = $resuelta->calificacion;
+                $i++;
             }
         }
 
@@ -41,7 +43,6 @@ class VotoPreguntas extends Component
             DB::beginTransaction();
             $i = 0;
             foreach ($this->preguntas as $pregunta) {
-                Log::debug($pregunta->id);
                 $calificacion = $this->calificaciones[$i];
 
                 if ($calificacion > 10) {
