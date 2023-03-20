@@ -16,6 +16,7 @@ class VotoPreguntas extends Component
     public $participante;
     public $calificaciones = [];
     public $preguntas = [];
+    public $total = 0;
     public function mount(Participante $participante)
     {
         $this->participante = $participante;
@@ -35,6 +36,13 @@ class VotoPreguntas extends Component
             }
         }
 
+        $this->total = array_sum($this->calificaciones);
+
+    }
+
+    public function updatedCalificaciones()
+    {
+        $this->total = array_sum($this->calificaciones);
     }
 
     public function guardarCalificaciones()

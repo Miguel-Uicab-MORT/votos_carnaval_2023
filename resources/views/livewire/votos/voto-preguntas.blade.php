@@ -79,7 +79,12 @@
                     </div>
                 @endforeach
             </div>
-            <div class="flex justify-end items-center">
+            <div class="flex justify-between items-center">
+                <div>
+                    <span>
+                        Total de puntos: <strong class="font-bold">{{$total}}</strong>
+                    </span>
+                </div>
                 <x-button class="mt-4" wire:click="guardarCalificaciones" wire:loading.attr="disabled">
                     {{ __('Guardar') }}
                 </x-button>
