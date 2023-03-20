@@ -17,7 +17,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 py-10">
         @foreach($participantes as $participante)
 
-            @if($participante->respuestas->count() > 0)
+            @if($participante->respuestas->count() > 0 and $participante->respuestas->first()->user_id == auth()->user()->id)
                 <a href="{{route('votos.preguntas', $participante)}}" class="p-5 flex justify-center items-center shadow-lg text-white rounded-md bg-green-700">
                     {{$participante->posicion . " - " . $participante->nombre}}
                 </a>
