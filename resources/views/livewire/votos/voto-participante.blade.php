@@ -16,9 +16,17 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 py-10">
         @foreach($participantes as $participante)
-            <a href="{{route('votos.preguntas', $participante)}}" class="p-5 flex justify-center items-center shadow-lg rounded-md bg-white">
-                {{$participante->posicion . " - " . $participante->nombre}}
-            </a>
+
+            @if($participante->respuestas->count() > 0)
+                <a href="{{route('votos.preguntas', $participante)}}" class="p-5 flex justify-center items-center shadow-lg text-white rounded-md bg-green-700">
+                    {{$participante->posicion . " - " . $participante->nombre}}
+                </a>
+            @else
+                <a href="{{route('votos.preguntas', $participante)}}" class="p-5 flex justify-center items-center shadow-lg text-white rounded-md bg-orange-300">
+                    {{$participante->posicion . " - " . $participante->nombre}}
+                </a>
+            @endif
+
         @endforeach
     </div>
 </div>
