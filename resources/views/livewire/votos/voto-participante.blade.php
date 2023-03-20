@@ -17,10 +17,10 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 py-10">
         @foreach($participantes as $participante)
 
-            @if($participante->respuestas->count() > 0 and $participante->respuestas->first()->user_id == auth()->user()->id)
+            @if($participante->respuestas->where('user_id', auth()->user()->id)->count() > 0)
                 <a href="{{route('votos.preguntas', $participante)}}" class="p-5 flex justify-center items-center shadow-lg text-white rounded-md bg-green-700">
-                    {{$participante->posicion . " - " . $participante->nombre}}
-                </a>
+                        {{$participante->posicion . " - " . $participante->nombre}}
+                    </a>
             @else
                 <a href="{{route('votos.preguntas', $participante)}}" class="p-5 flex justify-center items-center shadow-lg text-white rounded-md bg-orange-300">
                     {{$participante->posicion . " - " . $participante->nombre}}
